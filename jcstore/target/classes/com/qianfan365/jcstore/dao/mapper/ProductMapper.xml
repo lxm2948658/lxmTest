@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qianfan365.jcstore.dao.inter.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.qianfan365.jcstore.common.pojo.Product" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="bar_code" property="barCode" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="group_id" property="groupId" jdbcType="INTEGER" />
+    <result column="standard" property="standard" jdbcType="VARCHAR" />
+    <result column="cost_price" property="costPrice" jdbcType="DOUBLE" />
+    <result column="sale_price" property="salePrice" jdbcType="DOUBLE" />
+    <result column="inventory" property="inventory" jdbcType="INTEGER" />
+    <result column="sales_volume" property="salesVolume" jdbcType="INTEGER" />
+    <result column="shop_id" property="shopId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
+    <result column="custom_description" property="customDescription" jdbcType="VARCHAR" />
+    <result column="customer_case" property="customerCase" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, image, code, bar_code, status, group_id, standard, cost_price, sale_price, 
+    inventory, sales_volume, shop_id, user_id, keyword, custom_description, customer_case, 
+    createtime, updatetime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qianfan365.jcstore.common.pojo.ProductExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qianfan365.jcstore.common.pojo.ProductExample" >
+    delete from product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qianfan365.jcstore.common.pojo.Product" useGeneratedKeys="true" keyProperty="id" >
+    insert into product (name, image, code, 
+      bar_code, status, group_id, 
+      standard, cost_price, sale_price, 
+      inventory, sales_volume, shop_id, 
+      user_id, keyword, custom_description, 
+      customer_case, createtime, updatetime
+      )
+    values (#{name,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{barCode,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{groupId,jdbcType=INTEGER}, 
+      #{standard,jdbcType=VARCHAR}, #{costPrice,jdbcType=DOUBLE}, #{salePrice,jdbcType=DOUBLE}, 
+      #{inventory,jdbcType=INTEGER}, #{salesVolume,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{keyword,jdbcType=VARCHAR}, #{customDescription,jdbcType=VARCHAR}, 
+      #{customerCase,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertBatch" parameterType="ArrayList">
+    insert into product (name, image, code,
+    bar_code, status, group_id,
+    standard, cost_price, sale_price,
+    inventory, shop_id, user_id,
+    custom_description, customer_case, createtime,
+    updatetime) values
+    <foreach collection="list" index="index" item="obj" separator=",">
+      (#{obj.name,jdbcType=VARCHAR}, #{obj.image,jdbcType=VARCHAR}, #{obj.code,jdbcType=VARCHAR},
+      #{obj.barCode,jdbcType=VARCHAR}, #{obj.status,jdbcType=INTEGER}, #{obj.groupId,jdbcType=INTEGER},
+      #{obj.standard,jdbcType=VARCHAR}, #{obj.costPrice,jdbcType=DOUBLE}, #{obj.salePrice,jdbcType=DOUBLE},
+      #{obj.inventory,jdbcType=INTEGER}, #{obj.shopId,jdbcType=INTEGER}, #{obj.userId,jdbcType=INTEGER},
+      #{obj.customDescription,jdbcType=VARCHAR}, #{obj.customerCase,jdbcType=VARCHAR}, #{obj.createtime,jdbcType=TIMESTAMP}, #{obj.updatetime,jdbcType=TIMESTAMP}
+      )
+    </foreach>
+  </insert>
+  <insert id="insertSelective" parameterType="com.qianfan365.jcstore.common.pojo.Product" useGeneratedKeys="true" keyProperty="id" >
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="barCode != null" >
+        bar_code,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="standard != null" >
+        standard,
+      </if>
+      <if test="costPrice != null" >
+        cost_price,
+      </if>
+      <if test="salePrice != null" >
+        sale_price,
+      </if>
+      <if test="inventory != null" >
+        inventory,
+      </if>
+      <if test="salesVolume != null" >
+        sales_volume,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="keyword != null" >
+        keyword,
+      </if>
+      <if test="customDescription != null" >
+        custom_description,
+      </if>
+      <if test="customerCase != null" >
+        customer_case,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="barCode != null" >
+        #{barCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="standard != null" >
+        #{standard,jdbcType=VARCHAR},
+      </if>
+      <if test="costPrice != null" >
+        #{costPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="salePrice != null" >
+        #{salePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="inventory != null" >
+        #{inventory,jdbcType=INTEGER},
+      </if>
+      <if test="salesVolume != null" >
+        #{salesVolume,jdbcType=INTEGER},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="customDescription != null" >
+        #{customDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCase != null" >
+        #{customerCase,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qianfan365.jcstore.common.pojo.ProductExample" resultType="java.lang.Integer" >
+    select count(*) from product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update product
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null" >
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.barCode != null" >
+        bar_code = #{record.barCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupId != null" >
+        group_id = #{record.groupId,jdbcType=INTEGER},
+      </if>
+      <if test="record.standard != null" >
+        standard = #{record.standard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.costPrice != null" >
+        cost_price = #{record.costPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salePrice != null" >
+        sale_price = #{record.salePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.inventory != null" >
+        inventory = #{record.inventory,jdbcType=INTEGER},
+      </if>
+      <if test="record.salesVolume != null" >
+        sales_volume = #{record.salesVolume,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopId != null" >
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.keyword != null" >
+        keyword = #{record.keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customDescription != null" >
+        custom_description = #{record.customDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerCase != null" >
+        customer_case = #{record.customerCase,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null" >
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update product
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      bar_code = #{record.barCode,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      group_id = #{record.groupId,jdbcType=INTEGER},
+      standard = #{record.standard,jdbcType=VARCHAR},
+      cost_price = #{record.costPrice,jdbcType=DOUBLE},
+      sale_price = #{record.salePrice,jdbcType=DOUBLE},
+      inventory = #{record.inventory,jdbcType=INTEGER},
+      sales_volume = #{record.salesVolume,jdbcType=INTEGER},
+      shop_id = #{record.shopId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      keyword = #{record.keyword,jdbcType=VARCHAR},
+      custom_description = #{record.customDescription,jdbcType=VARCHAR},
+      customer_case = #{record.customerCase,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qianfan365.jcstore.common.pojo.Product" >
+    update product
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="barCode != null" >
+        bar_code = #{barCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="groupId != null" >
+        group_id = #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="standard != null" >
+        standard = #{standard,jdbcType=VARCHAR},
+      </if>
+      <if test="costPrice != null" >
+        cost_price = #{costPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="salePrice != null" >
+        sale_price = #{salePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="inventory != null" >
+        inventory = #{inventory,jdbcType=INTEGER},
+      </if>
+      <if test="salesVolume != null" >
+        sales_volume = #{salesVolume,jdbcType=INTEGER},
+      </if>
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="keyword != null" >
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="customDescription != null" >
+        custom_description = #{customDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCase != null" >
+        customer_case = #{customerCase,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qianfan365.jcstore.common.pojo.Product" >
+    update product
+    set name = #{name,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      bar_code = #{barCode,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      group_id = #{groupId,jdbcType=INTEGER},
+      standard = #{standard,jdbcType=VARCHAR},
+      cost_price = #{costPrice,jdbcType=DOUBLE},
+      sale_price = #{salePrice,jdbcType=DOUBLE},
+      inventory = #{inventory,jdbcType=INTEGER},
+      sales_volume = #{salesVolume,jdbcType=INTEGER},
+      shop_id = #{shopId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      custom_description = #{customDescription,jdbcType=VARCHAR},
+      customer_case = #{customerCase,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

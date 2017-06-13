@@ -1,0 +1,15 @@
+common:
+	css:
+		common.css:(系统默认样式、公共width,height,margin、padding、hide,show,....)
+	images:
+	js:
+front:
+manage:
+	css:
+		common.css:公共样式(table,input,button....)
+		main.css:除了公共样式的其他样式(login....)
+	images:
+	js:
+		controller:
+		module:
+		service:

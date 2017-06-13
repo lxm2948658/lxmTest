@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qianfan365.jcstore.dao.inter.OrderBespokeDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.qianfan365.jcstore.common.pojo.OrderBespokeDetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="order_info_id" property="orderInfoId" jdbcType="INTEGER" />
+    <result column="custom_product_id" property="customProductId" jdbcType="INTEGER" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="measure_info" property="measureInfo" jdbcType="VARCHAR" />
+    <result column="budget_appraisal" property="budgetAppraisal" jdbcType="DOUBLE" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, order_info_id, custom_product_id, image, name, measure_info, budget_appraisal, 
+    createtime, updatetime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qianfan365.jcstore.common.pojo.OrderBespokeDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from order_bespoke_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_bespoke_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order_bespoke_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qianfan365.jcstore.common.pojo.OrderBespokeDetailExample" >
+    delete from order_bespoke_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qianfan365.jcstore.common.pojo.OrderBespokeDetail" useGeneratedKeys="true" keyProperty="id" >
+    insert into order_bespoke_detail (order_info_id, custom_product_id, image, 
+      name, measure_info, budget_appraisal, 
+      createtime, updatetime)
+    values (#{orderInfoId,jdbcType=INTEGER}, #{customProductId,jdbcType=INTEGER}, #{image,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{measureInfo,jdbcType=VARCHAR}, #{budgetAppraisal,jdbcType=DOUBLE}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qianfan365.jcstore.common.pojo.OrderBespokeDetail" useGeneratedKeys="true" keyProperty="id" >
+    insert into order_bespoke_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderInfoId != null" >
+        order_info_id,
+      </if>
+      <if test="customProductId != null" >
+        custom_product_id,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="measureInfo != null" >
+        measure_info,
+      </if>
+      <if test="budgetAppraisal != null" >
+        budget_appraisal,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderInfoId != null" >
+        #{orderInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="customProductId != null" >
+        #{customProductId,jdbcType=INTEGER},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="measureInfo != null" >
+        #{measureInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="budgetAppraisal != null" >
+        #{budgetAppraisal,jdbcType=DOUBLE},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qianfan365.jcstore.common.pojo.OrderBespokeDetailExample" resultType="java.lang.Integer" >
+    select count(*) from order_bespoke_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update order_bespoke_detail
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderInfoId != null" >
+        order_info_id = #{record.orderInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="record.customProductId != null" >
+        custom_product_id = #{record.customProductId,jdbcType=INTEGER},
+      </if>
+      <if test="record.image != null" >
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.measureInfo != null" >
+        measure_info = #{record.measureInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.budgetAppraisal != null" >
+        budget_appraisal = #{record.budgetAppraisal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null" >
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update order_bespoke_detail
+    set id = #{record.id,jdbcType=INTEGER},
+      order_info_id = #{record.orderInfoId,jdbcType=INTEGER},
+      custom_product_id = #{record.customProductId,jdbcType=INTEGER},
+      image = #{record.image,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      measure_info = #{record.measureInfo,jdbcType=VARCHAR},
+      budget_appraisal = #{record.budgetAppraisal,jdbcType=DOUBLE},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qianfan365.jcstore.common.pojo.OrderBespokeDetail" >
+    update order_bespoke_detail
+    <set >
+      <if test="orderInfoId != null" >
+        order_info_id = #{orderInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="customProductId != null" >
+        custom_product_id = #{customProductId,jdbcType=INTEGER},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="measureInfo != null" >
+        measure_info = #{measureInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="budgetAppraisal != null" >
+        budget_appraisal = #{budgetAppraisal,jdbcType=DOUBLE},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qianfan365.jcstore.common.pojo.OrderBespokeDetail" >
+    update order_bespoke_detail
+    set order_info_id = #{orderInfoId,jdbcType=INTEGER},
+      custom_product_id = #{customProductId,jdbcType=INTEGER},
+      image = #{image,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      measure_info = #{measureInfo,jdbcType=VARCHAR},
+      budget_appraisal = #{budgetAppraisal,jdbcType=DOUBLE},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

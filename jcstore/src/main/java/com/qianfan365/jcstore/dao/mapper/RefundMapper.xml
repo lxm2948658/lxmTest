@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qianfan365.jcstore.dao.inter.RefundMapper" >
+  <resultMap id="BaseResultMap" type="com.qianfan365.jcstore.common.pojo.Refund" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="minimal_flag" property="minimalFlag" jdbcType="INTEGER" />
+    <result column="order_info_id" property="orderInfoId" jdbcType="INTEGER" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="refund_num" property="refundNum" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="customer" property="customer" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="contact_with" property="contactWith" jdbcType="VARCHAR" />
+    <result column="refund_total" property="refundTotal" jdbcType="DOUBLE" />
+    <result column="receice_amoun" property="receiceAmoun" jdbcType="DOUBLE" />
+    <result column="refund_fee" property="refundFee" jdbcType="DOUBLE" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="salesman" property="salesman" jdbcType="VARCHAR" />
+    <result column="refund_uid" property="refundUid" jdbcType="INTEGER" />
+    <result column="refund_salesman" property="refundSalesman" jdbcType="VARCHAR" />
+    <result column="refund_description" property="refundDescription" jdbcType="VARCHAR" />
+    <result column="expected_date" property="expectedDate" jdbcType="DATE" />
+    <result column="invoice_img" property="invoiceImg" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, minimal_flag, order_info_id, number, refund_num, status, customer_id, customer, 
+    phone, contact_with, refund_total, receice_amoun, refund_fee, user_id, salesman, 
+    refund_uid, refund_salesman, refund_description, expected_date, invoice_img, createtime, 
+    updatetime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qianfan365.jcstore.common.pojo.RefundExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from refund
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from refund
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from refund
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qianfan365.jcstore.common.pojo.RefundExample" >
+    delete from refund
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qianfan365.jcstore.common.pojo.Refund" useGeneratedKeys="true" keyProperty="id" >
+    insert into refund (minimal_flag, order_info_id, number, 
+      refund_num, status, customer_id, 
+      customer, phone, contact_with, 
+      refund_total, receice_amoun, refund_fee, 
+      user_id, salesman, refund_uid, 
+      refund_salesman, refund_description, expected_date, 
+      invoice_img, createtime, updatetime
+      )
+    values (#{minimalFlag,jdbcType=INTEGER}, #{orderInfoId,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR}, 
+      #{refundNum,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, 
+      #{customer,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{contactWith,jdbcType=VARCHAR}, 
+      #{refundTotal,jdbcType=DOUBLE}, #{receiceAmoun,jdbcType=DOUBLE}, #{refundFee,jdbcType=DOUBLE}, 
+      #{userId,jdbcType=INTEGER}, #{salesman,jdbcType=VARCHAR}, #{refundUid,jdbcType=INTEGER}, 
+      #{refundSalesman,jdbcType=VARCHAR}, #{refundDescription,jdbcType=VARCHAR}, #{expectedDate,jdbcType=DATE}, 
+      #{invoiceImg,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qianfan365.jcstore.common.pojo.Refund" useGeneratedKeys="true" keyProperty="id" >
+    insert into refund
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="minimalFlag != null" >
+        minimal_flag,
+      </if>
+      <if test="orderInfoId != null" >
+        order_info_id,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="refundNum != null" >
+        refund_num,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="customer != null" >
+        customer,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="contactWith != null" >
+        contact_with,
+      </if>
+      <if test="refundTotal != null" >
+        refund_total,
+      </if>
+      <if test="receiceAmoun != null" >
+        receice_amoun,
+      </if>
+      <if test="refundFee != null" >
+        refund_fee,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="salesman != null" >
+        salesman,
+      </if>
+      <if test="refundUid != null" >
+        refund_uid,
+      </if>
+      <if test="refundSalesman != null" >
+        refund_salesman,
+      </if>
+      <if test="refundDescription != null" >
+        refund_description,
+      </if>
+      <if test="expectedDate != null" >
+        expected_date,
+      </if>
+      <if test="invoiceImg != null" >
+        invoice_img,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="minimalFlag != null" >
+        #{minimalFlag,jdbcType=INTEGER},
+      </if>
+      <if test="orderInfoId != null" >
+        #{orderInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="refundNum != null" >
+        #{refundNum,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="customer != null" >
+        #{customer,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactWith != null" >
+        #{contactWith,jdbcType=VARCHAR},
+      </if>
+      <if test="refundTotal != null" >
+        #{refundTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="receiceAmoun != null" >
+        #{receiceAmoun,jdbcType=DOUBLE},
+      </if>
+      <if test="refundFee != null" >
+        #{refundFee,jdbcType=DOUBLE},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="salesman != null" >
+        #{salesman,jdbcType=VARCHAR},
+      </if>
+      <if test="refundUid != null" >
+        #{refundUid,jdbcType=INTEGER},
+      </if>
+      <if test="refundSalesman != null" >
+        #{refundSalesman,jdbcType=VARCHAR},
+      </if>
+      <if test="refundDescription != null" >
+        #{refundDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="expectedDate != null" >
+        #{expectedDate,jdbcType=DATE},
+      </if>
+      <if test="invoiceImg != null" >
+        #{invoiceImg,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qianfan365.jcstore.common.pojo.RefundExample" resultType="java.lang.Integer" >
+    select count(*) from refund
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update refund
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.minimalFlag != null" >
+        minimal_flag = #{record.minimalFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderInfoId != null" >
+        order_info_id = #{record.orderInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refundNum != null" >
+        refund_num = #{record.refundNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.customerId != null" >
+        customer_id = #{record.customerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.customer != null" >
+        customer = #{record.customer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactWith != null" >
+        contact_with = #{record.contactWith,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refundTotal != null" >
+        refund_total = #{record.refundTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.receiceAmoun != null" >
+        receice_amoun = #{record.receiceAmoun,jdbcType=DOUBLE},
+      </if>
+      <if test="record.refundFee != null" >
+        refund_fee = #{record.refundFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.salesman != null" >
+        salesman = #{record.salesman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refundUid != null" >
+        refund_uid = #{record.refundUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.refundSalesman != null" >
+        refund_salesman = #{record.refundSalesman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refundDescription != null" >
+        refund_description = #{record.refundDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expectedDate != null" >
+        expected_date = #{record.expectedDate,jdbcType=DATE},
+      </if>
+      <if test="record.invoiceImg != null" >
+        invoice_img = #{record.invoiceImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null" >
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update refund
+    set id = #{record.id,jdbcType=INTEGER},
+      minimal_flag = #{record.minimalFlag,jdbcType=INTEGER},
+      order_info_id = #{record.orderInfoId,jdbcType=INTEGER},
+      number = #{record.number,jdbcType=VARCHAR},
+      refund_num = #{record.refundNum,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      customer_id = #{record.customerId,jdbcType=INTEGER},
+      customer = #{record.customer,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      contact_with = #{record.contactWith,jdbcType=VARCHAR},
+      refund_total = #{record.refundTotal,jdbcType=DOUBLE},
+      receice_amoun = #{record.receiceAmoun,jdbcType=DOUBLE},
+      refund_fee = #{record.refundFee,jdbcType=DOUBLE},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      salesman = #{record.salesman,jdbcType=VARCHAR},
+      refund_uid = #{record.refundUid,jdbcType=INTEGER},
+      refund_salesman = #{record.refundSalesman,jdbcType=VARCHAR},
+      refund_description = #{record.refundDescription,jdbcType=VARCHAR},
+      expected_date = #{record.expectedDate,jdbcType=DATE},
+      invoice_img = #{record.invoiceImg,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qianfan365.jcstore.common.pojo.Refund" >
+    update refund
+    <set >
+      <if test="minimalFlag != null" >
+        minimal_flag = #{minimalFlag,jdbcType=INTEGER},
+      </if>
+      <if test="orderInfoId != null" >
+        order_info_id = #{orderInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="refundNum != null" >
+        refund_num = #{refundNum,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="customer != null" >
+        customer = #{customer,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactWith != null" >
+        contact_with = #{contactWith,jdbcType=VARCHAR},
+      </if>
+      <if test="refundTotal != null" >
+        refund_total = #{refundTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="receiceAmoun != null" >
+        receice_amoun = #{receiceAmoun,jdbcType=DOUBLE},
+      </if>
+      <if test="refundFee != null" >
+        refund_fee = #{refundFee,jdbcType=DOUBLE},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="salesman != null" >
+        salesman = #{salesman,jdbcType=VARCHAR},
+      </if>
+      <if test="refundUid != null" >
+        refund_uid = #{refundUid,jdbcType=INTEGER},
+      </if>
+      <if test="refundSalesman != null" >
+        refund_salesman = #{refundSalesman,jdbcType=VARCHAR},
+      </if>
+      <if test="refundDescription != null" >
+        refund_description = #{refundDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="expectedDate != null" >
+        expected_date = #{expectedDate,jdbcType=DATE},
+      </if>
+      <if test="invoiceImg != null" >
+        invoice_img = #{invoiceImg,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qianfan365.jcstore.common.pojo.Refund" >
+    update refund
+    set minimal_flag = #{minimalFlag,jdbcType=INTEGER},
+      order_info_id = #{orderInfoId,jdbcType=INTEGER},
+      number = #{number,jdbcType=VARCHAR},
+      refund_num = #{refundNum,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      customer_id = #{customerId,jdbcType=INTEGER},
+      customer = #{customer,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      contact_with = #{contactWith,jdbcType=VARCHAR},
+      refund_total = #{refundTotal,jdbcType=DOUBLE},
+      receice_amoun = #{receiceAmoun,jdbcType=DOUBLE},
+      refund_fee = #{refundFee,jdbcType=DOUBLE},
+      user_id = #{userId,jdbcType=INTEGER},
+      salesman = #{salesman,jdbcType=VARCHAR},
+      refund_uid = #{refundUid,jdbcType=INTEGER},
+      refund_salesman = #{refundSalesman,jdbcType=VARCHAR},
+      refund_description = #{refundDescription,jdbcType=VARCHAR},
+      expected_date = #{expectedDate,jdbcType=DATE},
+      invoice_img = #{invoiceImg,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

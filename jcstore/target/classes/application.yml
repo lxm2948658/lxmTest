@@ -1,0 +1,7 @@
+server.port: 8888
+server.context-path: /
+#common.domain-url: http://localhost
+#common.domain-url: http://192.168.10.109:8888/
+common.domain-url: https://tt.qianfan365.com/29
+#common.domain-url: http://127.0.0.1:8080/
+weiyu.server-url: http://ykd.tailinkj.com/index.php

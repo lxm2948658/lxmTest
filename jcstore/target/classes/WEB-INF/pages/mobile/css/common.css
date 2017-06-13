@@ -1,0 +1,58 @@
+@charset "utf-8";
+/*------------------------- reset -------------------------*/
+html,body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, blockquote, th, td { margin:0; padding:0; }
+ul,li{ list-style:none; }
+table {border-collapse:collapse; border-spacing:0;}
+fieldset, img { border:0; }
+address, caption, cite, code, dfn, em, th, var { font-style:normal; }
+q:before, q:after { content:''; }
+a { text-decoration:none;}
+a:hover { cursor:pointer; text-decoration:none; }
+a:active {outline:none;}
+sup { vertical-align:text-top; }
+sub { vertical-align:text-bottom; }
+input, textarea, select { font-family:inherit; font-size:inherit; *font-size:100%; font-weight:inherit; }
+legend { color:#000 }
+:focus { outline:0; outline:0; outline-style:none; -moz-outline-style:none; }
+input[type=checkbox], input[type=radio] { vertical-align:middle; }
+*{margin: 0; padding: 0; text-decoration: none; font-family: '微软雅黑';  
+-webkit-tap-highlight-color:rgba(0,0,0,0);}
+/*------------------------- float -------------------------*/
+.fleft{float: left;}
+.fright{float: right;}
+.clearfix{zoom:1}
+.clearfix:after{display:block;clear:both;content:'\20'}
+/*------------------------- width -----------------------*/
+.w100{width: 100px;}
+.w200{width: 200px;}
+.w100p{width: 100%;}
+/*------------------------- height -----------------------*/
+.h80{height: 80px;}
+/*------------------------- padding -----------------------*/
+.pdl10{padding-left: 10px;}
+.pdl20{padding-left: 20px;}
+.pdr10{padding-right: 10px;}
+.pdt10{padding-top: 10px;}
+.pdb10{padding-bottom: 10px;}
+/*------------------------- margin -----------------------*/
+.mgl10{margin-left: 10px;}
+
+.mt20{margin-top:43px;}
+.mt30{margin-top:33px;}
+/*------------------------- font -------------------------*/
+.bold{font-weight: bold;}
+/*------------------------- display ----------------------*/
+.hide{display: none;}
+.show{display: block;}
+.inline-block{display: inline-block;}
+/*------------------------- position -------------------------*/
+.posr{position: relative;}
+
+*{
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-khtml-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}

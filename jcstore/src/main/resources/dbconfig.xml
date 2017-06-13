@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.springframework.org/schema/tx 
+http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+http://www.springframework.org/schema/aop 
+http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+">
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="save*" propagation="REQUIRED" />
+            <tx:method name="edit*" propagation="REQUIRED" />
+            <tx:method name="create*" propagation="REQUIRED" />
+            <tx:method name="add*" propagation="REQUIRED" />
+            <tx:method name="set*" propagation="REQUIRED" />
+            <tx:method name="del*" propagation="REQUIRED" />
+            <tx:method name="update*" propagation="REQUIRED" />
+            <tx:method name="change*" propagation="REQUIRED" />
+            <tx:method name="verifyCode*" propagation="REQUIRED" />
+            <tx:method name="send*" propagation="REQUIRED" />
+            <tx:method name="finish*" propagation="REQUIRED" />
+            <tx:method name="auditing*" propagation="REQUIRED" />
+            <!--退保-->
+            <tx:method name="auditMarginRefund" propagation="REQUIRED" />
+            <tx:method name="insert*" propagation="REQUIRED" />
+            <tx:method name="cancel*" propagation="REQUIRED" />
+            <tx:method name="delay*" propagation="REQUIRED" />
+            <tx:method name="over*" propagation="REQUIRED" />
+            <tx:method name="refusal*" propagation="REQUIRED" />
+            <tx:method name="agree*" propagation="REQUIRED" />
+            <tx:method name="exec*" propagation="REQUIRED" />
+            <tx:method name="clear*" propagation="REQUIRED" />
+            <tx:method name="close*" propagation="REQUIRED" />
+            <tx:method name="operationOrder" propagation="REQUIRED" />
+            <tx:method name="permitSend" propagation="REQUIRED" />
+            <tx:method name="quitAuth" propagation="REQUIRED" />
+            <tx:method name="confirmReceipt" propagation="REQUIRED" />
+            <tx:method name="deny" propagation="REQUIRED" />
+            <tx:method name="calculate" propagation="REQUIRED" />
+            <tx:method name="applyForPlatform" propagation="REQUIRED" />
+            <tx:method name="applyForMarginRefund" propagation="REQUIRED" />
+            <tx:method name="tab*" propagation="REQUIRED" />
+
+            <tx:method name="find*" propagation="SUPPORTS" />
+            <tx:method name="get*" propagation="SUPPORTS" />
+            <tx:method name="*Statistics" propagation="SUPPORTS" />
+
+            <tx:method name="*" propagation="SUPPORTS" />
+        </tx:attributes>
+    </tx:advice>
+    <!-- aop配置,指定事务通知以及切入点 -->
+    <aop:config>
+        <!-- 事务切入点表达式 -->
+        <aop:pointcut expression="execution(* com.qianfan365.jcstore.service..*(..))" id="txPointcut" />
+        <!-- 事务切入点通知 -->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" />
+    </aop:config>
+
+</beans>

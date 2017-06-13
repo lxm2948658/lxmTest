@@ -1,0 +1,31 @@
+html,body{margin: 0 auto; padding: 0; background-color: #f6f8ff; font-size: 62.5%;width: 375px; font-family: "Microsoft YaHei"}
+body{font-size: 15px;}
+p,h1,h2,h3,h4,h5,h6{margin: 0;}
+.fl{float: left}
+.fr{float: right}
+.cl333{color: #333;}
+.cl999{color: #999;}
+.clf00{color: #f00;}
+.ml3r{margin-left: 48px;}
+.ml5r{margin-left: 5rem;}
+.ml58r{margin-left:75px;}
+.pab{position: absolute;}
+.bold{font-weight: bold;}
+.fs12r{font-size: 12px !important;}
+.fs14r{font-size: 14px !important;}
+.brkword{ word-break: break-all; word-wrap: break-word;}
+.share-container{padding: 10px; margin:15px auto;box-shadow: 0 4px 4px 0 #ccc; background-color: #fff;
+    background-image: url(../images/share-bordertop.png), url(../images/share-borderbottom.png);
+    background-position: left top, left bottom; background-size: 1.3rem 0.45rem, 0.5rem 1rem; background-repeat: repeat-x; width:325px;}
+.section{ border-bottom: 1px dashed #ddd; padding: 0.6rem 0;overflow: hidden;}
+.section:last-child{border: none;}
+.share-head{ border-bottom: 1px solid #ddd; padding: 1.2rem 0;}
+.share-head img{width: 3.8rem; height: 3.8rem;border-radius: 0.2rem; float: left; background-color: #ccc;}
+.share-head p{ color: #000; margin-left: 4.5rem; line-height: 3.8rem; overflow: hidden; text-overflow: ellipsis;white-space: nowrap;}
+.item{padding: 4px 0; position: relative; overflow: hidden}
+.item span,.item label{display: inline-block; line-height: 22px;font-size:14px;}
+.item label{font-size: 14px;}
+.item-container{border-bottom: 1px solid #eee;}
+.item-container:last-child{border-bottom: none;}
+
+
